@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokument</title>
+</head>
+<body>
+    <h3>Wypłata miesięczna raty</h3>
+    <form>
+        <input type="checkbox" name="react" id="react">Kurs React.js<br>
+        <input type="checkbox" name="js" id="js">Kurs JavaScript<br>
+
+        <label for="okres">Ilość rat: </label>
+        <input type="number" id="okres" name="okres" min="1"><br>
+        <label for="name">Podaj Imie i nazwisko: </label> <br>
+        <input type="text" name="imie" id="imie" placeholder="Imie">
+        <input type="text" name="nazwisko" id="nazwisko" placeholder="Nazwisko"><br>
+
+        <label for="wiek">Wpisz swój wiek: </label>
+        <input type="number" name="wiek" id="wiek"><br><br>
+
+        <select id="miasto">
+            <option value="Katowice">Katowice</option>
+            <option value="Warszawa">Warszawa</option>
+            <option value="Gdańsk">Gdańsk</option>
+        </select>
+        <input type="radio" name="plec" id="k" value="kobieta">Kobieta
+        <input type="radio" name="plec" id="m" value="mężczyzna">Mężczyzna
+        
+        <br><br>
+        <button type="button" onclick="obliczRate()">Oblicz ratę</button>
+        <p id="wynik"></p>
+        <p id="dane"></p>
+    </form>
+
+    <script>
+function obliczRate() {
+    const react = 5000;
+    const js = 3000;
+
+    let suma = 0;
+
+    if (document.getElementById("react").checked) {
+        suma += react;
+    }
+    if (document.getElementById("js").checked) {
+        suma += js;
+    }
+
+    let imie = document.getElementById("imie").value;
+    let nazwisko = document.getElementById("nazwisko").value;
+    let liczba = parseInt(document.getElementById("okres").value);
+    let miasto = document.getElementById("miasto").value;
+    
+    let plecElement = document.querySelector('input[name="plec"]:checked');
+    let plec = plecElement ? plecElement.value : "nie wybrano";
+
+    let wiek = document.getElementById("wiek").value;
+
+    let rat = suma / liczba;
+
+    document.getElementById("wynik").innerHTML = 
+        "Kurs odbędzie się w " + miasto + ". Koszt całkowity: " + suma + " zł. " + 
+        "Płacisz przez " + liczba + " mies. po " + rat.toFixed(2) + " zł.";
+    document.getElementById("dane").innerHTML = 
+    "Wasza płeć: " + plec + ". Imie Nazwisko: " + imie + " " + nazwisko
+    "Ilość lat: " + wiek;
+}
+    </script>
+</body>
+</html>
